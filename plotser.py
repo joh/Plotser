@@ -111,9 +111,11 @@ if __name__ == '__main__':
     parser.add_argument('device', help='serial device to plot')
     parser.add_argument('-b', '--baudrate', type=int, default=9600, metavar='BAUD',
         help='serial baud rate (default: %(default)s)')
+    parser.add_argument('-w', '--window', type=int, default=2000,
+        help='number of data points to show (default: %(default)s)')
 
     args = parser.parse_args()
     
-    g = PlotSer(args.device, args.baudrate)
+    g = PlotSer(args.device, args.baudrate, args.window)
     g.start()
 

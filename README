@@ -8,6 +8,9 @@
       
       Plotser reads data from a serial device and plots it in real-time.
       
+      It expects that each line contains a set of values separated by
+      whitespace.
+      
     ~ What do I need?
       
       Python 2.6+ with argparse
@@ -19,4 +22,5 @@
       
       optional arguments:
         -b, --baudrate BAUD     serial baud rate (default: 9600)
+        -w, --window WINDOW     number of data points to show (default: 2000)
 
