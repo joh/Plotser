@@ -6,6 +6,7 @@
 #
 from collections import defaultdict
 from itertools import cycle, chain
+from os.path import basename
 import serial
 import gobject
 import matplotlib
@@ -38,7 +39,7 @@ class PlotSer(object):
         return line
     
     def read(self):
-        """ Read a line from serial device """
+        """ Read and process a line from the serial device """
         line = self.ser.readline().strip()
         
         print line
@@ -67,6 +68,7 @@ class PlotSer(object):
         return True
     
     def update(self):
+        """ Update plot """
         if not self.X:
             return True
         
@@ -81,20 +83,32 @@ class PlotSer(object):
         return True
     
     def start(self):
+        """ Start plotser! """
+        
         # Open serial device
         self.ser = serial.Serial(args.device, args.baudrate, timeout=5)
         self.ser.open()
         
         # Create figure & subplot
         self.fig = figure()
-        self.fig.canvas.set_window_title('plotser: %s' % self.dev)
+        
+        title = '%s (%d Bd) - plotser' % (basename(self.dev), self.baud)
+        self.fig.canvas.set_window_title(title)
         
         self.ax = self.fig.add_subplot(111, autoscale_on=False, xlabel='time')
         
+        # Read serial device whenever possible
         gobject.idle_add(self.read)
+        
+        # Update graph every 100ms
         gobject.timeout_add(100, self.update)
-
+        
+        # Show (blocking)
         show()
+        
+        print "Bye!"
+        
+        # Close serial device
         self.ser.close()
 
 
