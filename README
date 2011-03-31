@@ -1,0 +1,22 @@
+
+                          Plotser
+                          
+              Real-time plotting of serial data
+
+
+    ~ What is it?
+      
+      Plotser reads data from a serial device and plots it in real-time.
+      
+    ~ What do I need?
+      
+      Python 2.6+ with argparse
+      matplotlib
+   
+    ~ Usage
+      
+      plotser.py [OPTION]... <device>
+      
+      optional arguments:
+        -b, --baudrate BAUD     serial baud rate (default: 9600)
+
