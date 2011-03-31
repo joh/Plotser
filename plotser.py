@@ -116,6 +116,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     
-    g = PlotSer(args.device, args.baudrate, args.window)
-    g.start()
+    plotser = PlotSer(args.device, args.baudrate, args.window)
+    plotser.start()
 
