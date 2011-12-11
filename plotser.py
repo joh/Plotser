@@ -45,7 +45,7 @@ class PlotSer(object):
         print line
         
         try:
-            data = map(int, line.split())
+            data = map(float, line.split())
         except ValueError:
             return True
         
@@ -76,7 +76,7 @@ class PlotSer(object):
             self.lines[i].set_data(self.X, [d[t] for t in self.X])
         
         self.ax.set_xlim(self.X[0], self.X[-1] + self.window / 4)
-        self.ax.set_ylim(self.dmin, self.dmax)
+        self.ax.set_ylim(self.dmin, self.dmax * 1.1)
         
         draw()
         
